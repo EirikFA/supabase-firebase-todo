@@ -1,6 +1,6 @@
 {
-  "name": "supabase-todo",
-  "short_name": "supabase-todo",
+  "name": "firebase-todo",
+  "short_name": "firebase-todo",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
