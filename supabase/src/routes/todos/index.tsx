@@ -20,35 +20,13 @@ const Todos: FunctionComponent = () => {
   const [filter, setFilter] = useState<Filter>("all");
   const [newTodo, onNewTodoInput, setNewTodo] = useInput<HTMLInputElement>();
 
-  const addLocal = (todo: Todo): void => {
-    setAllTodos(prev => [...prev, todo]);
-  };
-
-  const add = async (): Promise<void> => {
-    if (!session) return;
-
-    const { data } = await addTodo({
-      content: newTodo,
-      userId: session?.user.id
-    });
-
-    if (data && data.length > 0) {
-      setNewTodo("");
-      addLocal(data[0]);
-    }
-  };
-
-  const onAddTodo = useOnKey<HTMLInputElement, []>("Enter", add);
-
   useEffect(() => {
-    if (session?.user) {
-      supabase.from("todos").select(`
+    supabase.from("todos").select(`
         id,
         content,
         completed,
-        userId
+        user_id
       `).then(res => setAllTodos(res.data || []));
-    }
   }, [session?.user]);
 
   const filteredTodos = useMemo(() => allTodos.filter(todo => {
@@ -71,6 +49,26 @@ const Todos: FunctionComponent = () => {
   const logIn = () => auth.signIn({ provider: "github" });
 
   const logOut = () => auth.signOut();
+
+  const addLocal = (todo: Todo): void => {
+    setAllTodos(prev => [...prev, todo]);
+  };
+
+  const add = async (): Promise<void> => {
+    if (!session) return;
+
+    const { data } = await addTodo({
+      content: newTodo,
+      user_id: session?.user.id
+    });
+
+    if (data && data.length > 0) {
+      setNewTodo("");
+      addLocal(data[0]);
+    }
+  };
+
+  const onAddTodo = useOnKey<HTMLInputElement, []>("Enter", add);
 
   const editLocal = (id: string, updatedTodo: Partial<Todo>): void => {
     setAllTodos(prev => updateArrayEl(prev, "id", id, updatedTodo));
