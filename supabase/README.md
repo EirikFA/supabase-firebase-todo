@@ -1,5 +1,8 @@
 # supabase-todo
 
+## Setup
+Copy [`.env.template`](.env.template) to a `.env` file (in the root directory) and fill in your Supabase URL and public key.
+
 ## CLI Commands
 *   `npm install`: Installs dependencies
 

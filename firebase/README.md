@@ -1,4 +1,7 @@
-# supabase-todo
+# firebase-todo
+
+## Setup
+Place your Firebase config in JSON format in a `firebase.json` file in [src/api](src/api).
 
 ## CLI Commands
 *   `npm install`: Installs dependencies
