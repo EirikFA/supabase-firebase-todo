@@ -13,10 +13,9 @@ export default function useDoubleClick <Target extends EventTarget, Params exten
 
     clearTimeout(timeout);
     timeout = window.setTimeout(() => {
-      if (clicks.length > 1) callback.call(event.target, event, ...rest);
+      if (clicks.length > 1) callback(event, ...rest);
 
       clicks = [];
     }, 250);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 }

@@ -13,7 +13,7 @@ export interface TodoItemProps {
 
 const TodoItem: FunctionComponent<TodoItemProps> = (
   {
-    todo: { id, content, completed },
+    todo: { content, completed },
     editing,
     onClick,
     onToggle,
@@ -27,13 +27,12 @@ const TodoItem: FunctionComponent<TodoItemProps> = (
   >
     <div className="view">
       <input
-        id={`todo-${id}`}
         className="toggle"
         type="checkbox"
         checked={completed}
         onChange={onToggle}
       />
-      <label htmlFor={`todo-${id}`}>{content}</label>
+      <label>{content}</label>
       <button className="destroy" type="button" onClick={onDelete} />
     </div>
 
